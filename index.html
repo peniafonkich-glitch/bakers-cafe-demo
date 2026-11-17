@@ -10,279 +10,189 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&family=Work+Sans:wght@400;500;700&display=swap&subset=latin-ext" rel="stylesheet">
 <style>
-/* Kierunek: papierowa torba z piekarni. Morelowa strona, kraftowa torba na zamówienie, pieczęć z obracanym napisem, rogal z pieca. */
+/* Kierunek: dwa światy obok siebie. Po lewej stała czerwona witryna z rogalem i zmieniającym się słowem, po prawej przewija się cała treść.
+   Zamówienie bez formularza: trzy duże drzwi (telefon, Instagram, e-mail). */
 :root{
   --apricot:#ffd9bd;
   --apricot-2:#ffc9a2;
   --choco:#3b1f12;
   --tomato:#d9422a;
-  --kraft:#c99660;
-  --kraft-2:#b3814d;
+  --tomato-2:#b93219;
   --paper:#fff4e8;
   --mute:#7a5a47;
   --line:#e9b88f;
-  --gut:clamp(20px,5vw,64px);
+  --gut:clamp(20px,4.4vw,64px);
   --hd:'Syne','Helvetica Neue',Arial,sans-serif;
   --bd:'Work Sans','Helvetica Neue',Arial,sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0}
-html{background:var(--apricot)}
+html{background:var(--apricot);scroll-behavior:smooth}
 body{font-family:var(--bd);font-size:17px;line-height:1.6;color:var(--choco);background:var(--apricot);-webkit-font-smoothing:antialiased;overflow-x:hidden}
 a{color:inherit;text-underline-offset:3px}
-:focus-visible{outline:3px solid var(--tomato);outline-offset:3px;border-radius:4px}
-h1,h2,h3{font-family:var(--hd);font-weight:800;line-height:.98;letter-spacing:-.03em}
-.wrap{max-width:1180px;margin:0 auto;padding:0 var(--gut)}
-.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 28px;border-radius:999px;background:var(--tomato);color:#fff;font:700 16px var(--bd);text-decoration:none;border:2px solid var(--tomato);cursor:pointer;transition:transform .15s,background .15s}
-.btn:hover{transform:translateY(-2px);background:#bb3319;border-color:#bb3319}
-.btn.out{background:transparent;color:var(--choco);border-color:var(--choco)}
-.btn.out:hover{background:var(--choco);color:#fff;border-color:var(--choco)}
-.btn.w{background:#fff;color:var(--choco);border-color:#fff}
+:focus-visible{outline:3px solid var(--choco);outline-offset:3px;border-radius:4px}
+h1,h2,h3{font-family:var(--hd);font-weight:800;line-height:.96;letter-spacing:-.03em}
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;padding:0 26px;border-radius:999px;background:var(--choco);color:#fff;font:700 16px var(--bd);text-decoration:none;border:2px solid var(--choco);cursor:pointer;transition:transform .15s}
+.btn:hover{transform:translateY(-2px)}
+.btn.t{background:var(--tomato);border-color:var(--tomato)}
 
-header{position:fixed;inset:0 0 auto 0;z-index:30;display:flex;justify-content:space-between;align-items:center;padding:14px var(--gut);transition:background .2s}
-header.solid{background:rgba(255,217,189,.95);border-bottom:2px solid var(--choco)}
-.brand{font:800 24px var(--hd);letter-spacing:-.04em;text-decoration:none}
-.brand i{font-style:normal;color:var(--tomato)}
-header nav{display:flex;gap:26px;font:500 15px var(--bd)}
-header nav a{text-decoration:none}
-header nav a:hover{color:var(--tomato)}
-@media(max-width:560px){header nav .opt{display:none}}
-
-/* scena */
-.hero{position:relative;min-height:100vh;min-height:100svh;overflow:hidden}
-.board{position:absolute;right:clamp(0px,4vw,70px);bottom:14%;width:min(48vw,600px);aspect-ratio:1;border-radius:50%;background:var(--apricot-2);box-shadow:inset 0 0 0 14px #e6a97a}
+.shell{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);min-height:100vh}
+/* lewa witryna */
+.left{position:sticky;top:0;height:100vh;height:100svh;background:var(--tomato);color:var(--apricot);overflow:hidden}
+.left .brand{position:absolute;left:var(--gut);top:26px;z-index:3;font:800 26px var(--hd);letter-spacing:-.04em;text-decoration:none;color:#fff}
+.left .addr{position:absolute;left:var(--gut);top:70px;z-index:3;font:700 12px var(--bd);letter-spacing:.24em;text-transform:uppercase}
+.ring{position:absolute;left:50%;top:44%;width:min(78%,520px);aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:var(--tomato-2)}
 #cv{position:absolute;inset:0;width:100%;height:100%;display:block;z-index:2}
-.lines{position:absolute;left:var(--gut);top:50%;transform:translateY(-62%);z-index:3;width:min(54vw,720px);height:clamp(250px,42vh,420px)}
-.l{position:absolute;left:0;top:0;width:100%;opacity:0;animation:show 12s infinite both}
-.l2{animation-delay:4s}.l3{animation-delay:8s}
-@keyframes show{0%{opacity:0;transform:translateY(34px)}5%,30%{opacity:1;transform:none}36%,100%{opacity:0;transform:translateY(-34px)}}
-.l h1,.l h2{font-size:clamp(44px,7.4vw,114px)}
-.l p{margin-top:18px;max-width:32ch;font-size:clamp(17px,1.6vw,22px);color:var(--mute)}
-.kicker{position:absolute;left:var(--gut);top:clamp(84px,14vh,118px);z-index:3;font:700 13px var(--bd);letter-spacing:.26em;text-transform:uppercase;color:var(--tomato)}
-.cta{position:absolute;left:var(--gut);bottom:clamp(40px,9vh,80px);z-index:4;display:flex;gap:12px;flex-wrap:wrap}
-.stamp{position:absolute;right:var(--gut);top:clamp(90px,14vh,130px);z-index:3;width:clamp(110px,13vw,170px);aspect-ratio:1;animation:turn 30s linear infinite}
-.stamp text{font:700 11px var(--bd);letter-spacing:.22em;fill:var(--choco);text-transform:uppercase}
-@keyframes turn{to{transform:rotate(360deg)}}
-@media(max-width:820px){
-  .lines{width:calc(100% - 2*var(--gut));top:24%;transform:none;height:170px}
-  .l h1,.l h2{font-size:clamp(38px,11.5vw,76px)}
-  .kicker{font-size:11px;letter-spacing:.14em;right:var(--gut)}
-  .stamp{display:none}
-  .board{width:84vw;right:8vw;bottom:19%}
-}
-.ticker{background:var(--choco);color:var(--apricot);overflow:hidden;white-space:nowrap;padding:16px 0}
-.ticker div{display:inline-block;animation:run 30s linear infinite;font:800 clamp(24px,3vw,40px) var(--hd);letter-spacing:-.03em;text-transform:uppercase}
-.ticker span{margin:0 26px;color:var(--tomato)}
-@keyframes run{to{transform:translateX(-50%)}}
+.word{position:absolute;left:var(--gut);right:var(--gut);bottom:clamp(26px,6vh,56px);z-index:3;height:clamp(60px,7vw,110px)}
+.word span{position:absolute;left:0;bottom:0;opacity:0;font:800 clamp(44px,5vw,92px)/.9 var(--hd);letter-spacing:-.05em;color:#fff;animation:w 15s infinite both}
+.word span:nth-child(2){animation-delay:3s}.word span:nth-child(3){animation-delay:6s}.word span:nth-child(4){animation-delay:9s}.word span:nth-child(5){animation-delay:12s}
+@keyframes w{0%{opacity:0;transform:translateY(40px)}4%,18%{opacity:1;transform:none}22%,100%{opacity:0;transform:translateY(-40px)}}
 
-.sec{padding:clamp(64px,10vh,120px) 0}
-.sec h2{font-size:clamp(42px,6.8vw,98px)}
-.lead{margin-top:14px;max-width:56ch;color:var(--mute)}
+/* prawa kolumna */
+.right{position:relative;background:var(--apricot)}
+.top{position:sticky;top:0;z-index:20;display:flex;gap:10px;justify-content:flex-end;padding:14px var(--gut);background:linear-gradient(180deg,var(--apricot) 70%,rgba(255,217,189,0))}
+.top a{text-decoration:none;font:700 14px var(--bd);padding:10px 18px;border:2px solid var(--choco);border-radius:999px;background:var(--apricot)}
+.top a:hover{background:var(--choco);color:#fff}
+.wrap{padding:0 var(--gut)}
+.sec{padding:clamp(44px,8vh,96px) 0}
+.sec h2{font-size:clamp(40px,5.6vw,84px)}
+.lead{margin-top:14px;max-width:52ch;color:var(--mute)}
+.big{font:600 clamp(26px,3.4vw,46px)/1.12 var(--hd);letter-spacing:-.03em;max-width:20ch}
+.big em{font-style:normal;color:var(--tomato)}
+.facts{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.facts span{padding:10px 16px;border:2px solid var(--choco);border-radius:999px;font:700 14px var(--bd)}
 
-/* z pieca: poziomy pas pozycji */
-.rail{display:flex;gap:clamp(12px,2vw,22px);overflow-x:auto;scroll-snap-type:x mandatory;padding:10px 0 22px;margin-top:clamp(26px,5vh,46px);scrollbar-width:thin;scrollbar-color:var(--choco) transparent}
-.item{flex:0 0 min(300px,78vw);scroll-snap-align:start;background:var(--paper);border:3px solid var(--choco);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 7px 0 var(--choco)}
-.item .ph{position:relative;aspect-ratio:4/3;background:var(--apricot-2);border-bottom:3px solid var(--choco)}
-.item .ph img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.item .ph span{position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:14px;font-size:13px;color:var(--mute)}
-.item .bd{padding:18px;display:flex;flex-direction:column;gap:8px;flex:1}
-.item h3{font-size:30px}
-.item p{font-size:15px;color:var(--mute);flex:1}
-.add{margin-top:6px;min-height:48px;border:3px solid var(--choco);border-radius:999px;background:var(--apricot);color:var(--choco);font:700 15px var(--bd);cursor:pointer}
-.add:hover{background:var(--choco);color:#fff}
-.add[aria-pressed=true]{background:var(--tomato);border-color:var(--tomato);color:#fff}
+/* lista z pieca */
+.list{list-style:none;margin-top:clamp(22px,4vh,40px);border-top:3px solid var(--choco)}
+.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 18px;align-items:center;padding:22px 0;border-bottom:2px solid var(--choco)}
+.row h3{font-size:clamp(30px,3.6vw,48px)}
+.row p{grid-column:1;color:var(--mute);max-width:44ch}
+.row .ask{grid-row:1/3;grid-column:2;min-height:48px;padding:0 20px;border:2px solid var(--choco);border-radius:999px;background:transparent;color:var(--choco);font:700 14px var(--bd);text-decoration:none;display:inline-flex;align-items:center}
+.row .ask:hover{background:var(--choco);color:#fff}
+.row .ph{display:none}
+@media(max-width:560px){.row{grid-template-columns:1fr}.row .ask{grid-row:auto;grid-column:1;justify-self:start}}
 
-/* torba na zamówienie */
-.order{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(28px,5vw,72px);margin-top:clamp(28px,5vh,48px);align-items:start}
-@media(max-width:900px){.order{grid-template-columns:1fr}}
-fieldset{border:0;margin-bottom:24px}
-legend,label.t{display:block;font:700 13px var(--bd);letter-spacing:.14em;text-transform:uppercase;margin-bottom:10px;padding:0;color:var(--tomato)}
-.seg{display:flex;flex-wrap:wrap;gap:10px}
-.seg input{position:absolute;opacity:0;width:1px;height:1px}
-.seg label{margin:0;padding:10px 20px;min-height:50px;display:inline-flex;align-items:center;border:3px solid var(--choco);border-radius:999px;cursor:pointer;font:500 16px var(--bd);background:var(--paper);color:var(--choco);text-transform:none;letter-spacing:0}
-.seg input:checked+label{background:var(--choco);color:#fff}
-.seg input:focus-visible+label{outline:3px solid var(--tomato);outline-offset:2px}
-input[type=text]{width:100%;min-height:54px;padding:0 16px;font:16px var(--bd);color:var(--choco);background:var(--paper);border:3px solid var(--choco);border-radius:14px}
-input[type=text]:focus{outline:3px solid var(--tomato);outline-offset:1px}
-.fields{display:grid;gap:16px}
-.bag{position:sticky;top:84px;background:var(--kraft);color:var(--choco);padding:clamp(34px,4vw,48px) clamp(22px,3vw,36px) clamp(24px,3vw,36px);clip-path:polygon(0 18px,5% 0,10% 18px,15% 0,20% 18px,25% 0,30% 18px,35% 0,40% 18px,45% 0,50% 18px,55% 0,60% 18px,65% 0,70% 18px,75% 0,80% 18px,85% 0,90% 18px,95% 0,100% 18px,100% 100%,0 100%);box-shadow:0 8px 0 var(--kraft-2)}
-.bag h3{font-size:34px;margin-bottom:12px}
-.bag pre{white-space:pre-wrap;font:500 17px/1.65 var(--bd);min-height:190px;background:rgba(255,244,232,.55);border-radius:12px;padding:16px}
-.acts{display:grid;gap:10px;margin-top:18px}
-.msg{min-height:22px;margin-top:10px;font-size:14px}
-@media(max-width:900px){.bag{position:static}}
+/* trzy drzwi */
+.doors{display:grid;grid-template-columns:1fr;gap:14px;margin-top:clamp(22px,4vh,40px)}
+.door{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:clamp(20px,3vw,32px);border:3px solid var(--choco);border-radius:26px;text-decoration:none;background:var(--paper);box-shadow:0 7px 0 var(--choco);transition:transform .15s,box-shadow .15s}
+.door:hover{transform:translateY(4px);box-shadow:0 3px 0 var(--choco)}
+.door b{font:800 clamp(26px,3.2vw,40px)/1 var(--hd);letter-spacing:-.03em}
+.door small{display:block;margin-top:6px;font:500 15px var(--bd);color:var(--mute)}
+.door i{font:800 28px var(--hd);font-style:normal}
+.door.t{background:var(--tomato);color:#fff;border-color:var(--choco)}
+.door.t small{color:#ffe0d6}
 
-.contact{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(28px,5vw,72px);margin-top:clamp(28px,5vh,48px)}
-@media(max-width:860px){.contact{grid-template-columns:1fr}}
-dl{display:grid;grid-template-columns:auto 1fr;gap:12px 26px}
+.contact{margin-top:clamp(22px,4vh,40px);display:grid;gap:22px}
+dl{display:grid;grid-template-columns:auto 1fr;gap:12px 24px}
 dt{font:700 13px var(--bd);letter-spacing:.14em;text-transform:uppercase;color:var(--tomato);padding-top:6px}
-dd{font-size:20px}
-.map{border:3px solid var(--choco);border-radius:24px;overflow:hidden;min-height:400px;background:var(--apricot-2);box-shadow:0 8px 0 var(--choco)}
-.map iframe{width:100%;height:100%;min-height:400px;border:0;display:block}
-footer{padding:36px 0 56px;border-top:3px solid var(--choco)}
+dd{font-size:19px}
+.map{border:3px solid var(--choco);border-radius:26px;overflow:hidden;min-height:340px;background:var(--apricot-2);box-shadow:0 7px 0 var(--choco)}
+.map iframe{width:100%;height:100%;min-height:340px;border:0;display:block}
+footer{padding:32px var(--gut) 56px;border-top:3px solid var(--choco)}
 footer p{max-width:84ch;font-size:14px;color:var(--mute)}
-@media(prefers-reduced-motion:reduce){.l{animation:none;opacity:0}.l1{opacity:1}.stamp,.ticker div{animation:none}*{transition-duration:.01ms!important;scroll-behavior:auto!important}}
+
+/* telefon: witryna na górze, treść niżej */
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .left{position:relative;height:72svh;min-height:430px}
+  .ring{top:42%;width:76%}
+  .word{height:90px}
+  .word span{font-size:clamp(46px,14vw,82px)}
+  .top{position:fixed;top:auto;bottom:0;left:0;right:0;justify-content:center;padding:10px 16px calc(10px + env(safe-area-inset-bottom));background:rgba(255,217,189,.97);border-top:2px solid var(--choco)}
+  body{padding-bottom:70px}
+}
+@media(prefers-reduced-motion:reduce){.word span{animation:none;opacity:0}.word span:first-child{opacity:1}*{transition-duration:.01ms!important;scroll-behavior:auto!important}}
 </style>
 </head>
 <body>
 
-<header id="hd">
-  <a class="brand" href="#start">Baker's <i>Cafe</i></a>
-  <nav aria-label="Menu"><a class="opt" href="#oferta">Z pieca</a><a href="#zamow">Zamów</a><a class="opt" href="#kontakt">Kontakt</a></nav>
-</header>
+<div class="shell">
+  <aside class="left" id="start">
+    <a class="brand" href="#start">Baker's Cafe</a>
+    <div class="addr">Toruń · Dziewulskiego 20b</div>
+    <div class="ring" aria-hidden="true"></div>
+    <canvas id="cv" role="img" aria-label="Trójwymiarowy złocisty rogal z lukrem i orzechami. Model wygenerowany komputerowo, nie zdjęcie wypieku."></canvas>
+    <div class="word" aria-hidden="true"><span>Kawa.</span><span>Kanapki.</span><span>Śniadania.</span><span>Ciasta.</span><span>Drożdżówki.</span></div>
+  </aside>
 
-<main>
-<section class="hero" id="start">
-  <div class="board" aria-hidden="true"></div>
-  <svg class="stamp" viewBox="0 0 200 200" aria-hidden="true"><defs><path id="c" d="M100,100 m-80,0 a80,80 0 1,1 160,0 a80,80 0 1,1 -160,0"/></defs><text><textPath href="#c">kawiarnio-piekarnia · Toruń · prosto z pieca · kawiarnio-piekarnia · Toruń ·</textPath></text></svg>
-  <canvas id="cv" role="img" aria-label="Trójwymiarowy złocisty rogal z lukrem i orzechami. Model wygenerowany komputerowo, nie zdjęcie wypieku."></canvas>
-  <div class="kicker">Toruń · ul. Dziewulskiego 20b</div>
-  <div class="lines">
-    <div class="l l1"><h1>Prosto z pieca.</h1><p>Kawiarnio-piekarnia, w której aromatyczna kawa łączy się z wyjątkowymi smakołykami.</p></div>
-    <div class="l l2"><h2>Kanapki i śniadania.</h2><p>Pyszne kanapki i zestawy śniadaniowe.</p></div>
-    <div class="l l3"><h2>Ciasta i drożdżówki.</h2><p>Domowe, na chwilę relaksu w przytulnej atmosferze.</p></div>
-  </div>
-  <div class="cta"><a class="btn" href="#zamow">Zamów na wynos</a><a class="btn out" href="#oferta">Co mamy z pieca</a></div>
-</section>
+  <main class="right">
+    <nav class="top" aria-label="Menu"><a href="#oferta">Z pieca</a><a href="#zamow">Zamów</a><a href="#kontakt">Kontakt</a></nav>
 
-<div class="ticker" aria-hidden="true"><div>
-  Kawa <span>●</span> Kanapki <span>●</span> Zestawy śniadaniowe <span>●</span> Domowe ciasta <span>●</span> Drożdżówki <span>●</span> Rogale marcińskie <span>●</span>
-  Kawa <span>●</span> Kanapki <span>●</span> Zestawy śniadaniowe <span>●</span> Domowe ciasta <span>●</span> Drożdżówki <span>●</span> Rogale marcińskie <span>●</span>
-</div></div>
+    <div class="wrap">
+      <section class="sec" id="o-nas">
+        <h1 class="big">Kawiarnio-piekarnia, w której aromatyczna kawa łączy się z <em>wyjątkowymi smakołykami.</em></h1>
+        <p class="lead">Pyszne kanapki, zestawy śniadaniowe oraz domowe ciasta i drożdżówki, na chwilę relaksu w przytulnej atmosferze smaków. To ich własne słowa z Facebooka.</p>
+        <div class="facts"><span>100% poleca</span><span>22 opinie</span><span>Na miejscu</span><span>Na wynos</span><span>Rezerwacje</span></div>
+      </section>
 
-<section class="sec" id="oferta">
-  <div class="wrap">
-    <h2>Z pieca</h2>
-    <p class="lead">Oferujemy pyszne kanapki, zestawy śniadaniowe oraz domowe ciasta i drożdżówki. Aktualne menu i ceny podaje kawiarnia. Przewiń w bok i dodaj do torby, co Cię kusi.</p>
-  </div>
-  <div class="wrap"><div class="rail" id="rail" tabindex="0" aria-label="Pozycje z pieca"></div></div>
-</section>
+      <section class="sec" id="oferta" style="padding-top:0">
+        <h2>Z pieca</h2>
+        <p class="lead">Aktualne menu i ceny podaje kawiarnia. Kliknij „Zapytaj”, a otworzy się gotowy e-mail z tą pozycją.</p>
+        <ul class="list" id="list"></ul>
+      </section>
 
-<section class="sec" id="zamow" style="padding-top:0">
-  <div class="wrap">
-    <h2>Twoja torba</h2>
-    <p class="lead">Wybierz pozycje i godzinę odbioru. W torbie powstaje gotowa wiadomość: wyślesz ją e-mailem, napiszesz na Instagramie albo zadzwonisz.</p>
-    <div class="order">
-      <div>
-        <fieldset><legend>Odbiór</legend><div class="seg" id="seg"></div></fieldset>
-        <div class="fields">
-          <div><label class="t" for="nt">Uwagi</label><input type="text" id="nt" placeholder="np. kanapka bez cebuli" autocomplete="off"></div>
-          <div><label class="t" for="nm">Twoje imię</label><input type="text" id="nm" autocomplete="given-name"></div>
+      <section class="sec" id="zamow" style="padding-top:0">
+        <h2>Zamów</h2>
+        <p class="lead">Bez formularza: wybierz, jak wolisz się z nimi skontaktować.</p>
+        <div class="doors">
+          <a class="door t" href="tel:+48696975279"><div><b>Zadzwoń</b><small>696 975 279</small></div><i>→</i></a>
+          <a class="door" href="https://www.instagram.com/baker_s_cafe/" target="_blank" rel="noopener"><div><b>Instagram</b><small>@baker_s_cafe</small></div><i>→</i></a>
+          <a class="door" href="mailto:bakery.marcinw@gmail.com?subject=Zam%C3%B3wienie%20na%20odbi%C3%B3r&amp;body=Dzie%C5%84%20dobry%2C%0A%0Aproszę%20o%20przygotowanie%20na%20odbi%C3%B3r%3A%0A%0A"><div><b>E-mail</b><small>bakery.marcinw@gmail.com</small></div><i>→</i></a>
         </div>
-      </div>
-      <aside class="bag" aria-live="polite">
-        <h3>W torbie</h3>
-        <pre id="pre"></pre>
-        <div class="acts">
-          <a class="btn w" id="mail" href="#">Wyślij e-mailem</a>
-          <a class="btn out" href="tel:+48696975279">Zadzwoń: 696 975 279</a>
-          <a class="btn out" href="https://www.instagram.com/baker_s_cafe/" target="_blank" rel="noopener">Napisz na Instagramie</a>
-          <button type="button" class="btn out" id="copy">Kopiuj wiadomość</button>
+      </section>
+
+      <section class="sec" id="kontakt" style="padding-top:0">
+        <h2>Jak trafić</h2>
+        <div class="contact">
+          <dl>
+            <dt>Adres</dt><dd>ul. Dziewulskiego 20b<br>87-100 Toruń</dd>
+            <dt>Facebook</dt><dd><a href="https://www.facebook.com/bakeryTorun/" rel="noopener">Baker's Cafe | Toruń</a></dd>
+            <dt>Godziny</dt><dd>Podaje kawiarnia.</dd>
+          </dl>
+          <div class="map"><iframe title="Mapa: Baker's Cafe, Dziewulskiego 20b, Toruń" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=18.6650%2C53.0230%2C18.6850%2C53.0330&amp;layer=mapnik&amp;marker=53.0278823%2C18.6750458"></iframe></div>
         </div>
-        <div class="msg" id="msg" role="status"></div>
-      </aside>
+      </section>
     </div>
-  </div>
-</section>
 
-<section class="sec" id="kontakt" style="padding-top:0">
-  <div class="wrap">
-    <h2>Kontakt</h2>
-    <div class="contact">
-      <dl>
-        <dt>Adres</dt><dd>ul. Dziewulskiego 20b<br>87-100 Toruń</dd>
-        <dt>Telefon</dt><dd><a href="tel:+48696975279">696 975 279</a></dd>
-        <dt>E-mail</dt><dd><a href="mailto:bakery.marcinw@gmail.com">bakery.marcinw@gmail.com</a></dd>
-        <dt>Facebook</dt><dd><a href="https://www.facebook.com/bakeryTorun/" rel="noopener">Baker's Cafe | Toruń</a></dd>
-        <dt>Instagram</dt><dd><a href="https://www.instagram.com/baker_s_cafe/" rel="noopener">@baker_s_cafe</a></dd>
-        <dt>Opinie</dt><dd>100% poleca, 22 opinie na Facebooku</dd>
-        <dt>Na miejscu</dt><dd>Na miejscu, na wynos, rezerwacje. Godziny podaje kawiarnia.</dd>
-      </dl>
-      <div class="map"><iframe title="Mapa: Baker's Cafe, Dziewulskiego 20b, Toruń" loading="lazy" src="https://www.openstreetmap.org/export/embed.html?bbox=18.6650%2C53.0230%2C18.6850%2C53.0330&amp;layer=mapnik&amp;marker=53.0278823%2C18.6750458"></iframe></div>
-    </div>
-  </div>
-</section>
-</main>
-
-<footer>
-  <div class="wrap">
-    <p>To makieta nowej strony. Nie ma na niej zdjęć kawiarni: rogal na ekranie to model 3D wygenerowany komputerowo. W pełnej wersji pojawią się prawdziwe zdjęcia, menu z cenami i godziny otwarcia, za zgodą właścicieli. Teksty, adres, liczby i dane kontaktowe pochodzą z facebookowej strony Baker's Cafe.</p>
-  </div>
-</footer>
+    <footer>
+      <p>To makieta nowej strony. Nie ma na niej zdjęć kawiarni: rogal na ekranie to model 3D wygenerowany komputerowo. W pełnej wersji pojawią się prawdziwe zdjęcia, menu z cenami i godziny otwarcia, za zgodą właścicieli. Teksty, adres, liczby i dane kontaktowe pochodzą z facebookowej strony Baker's Cafe.</p>
+    </footer>
+  </main>
+</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
 <script>
 (function(){
 var $=function(i){return document.getElementById(i)};
-var hd=$('hd');
 var still=matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches;
-document.addEventListener('click',function(e){var a=e.target.closest&&e.target.closest('a[href^="#"]');if(!a)return;var id=a.getAttribute('href').slice(1);var t=id&&$(id);if(t){e.preventDefault();window.scrollTo({top:t.getBoundingClientRect().top+window.scrollY-(id==='start'?0:56),behavior:still?'auto':'smooth'})}});
-addEventListener('scroll',function(){hd.classList.toggle('solid',scrollY>40)},{passive:true});
 
-/* 3D: lekki rogal, obraca się sam */
+/* 3D w lewej witrynie: lekki rogal, obraca się sam */
 var cv=$('cv'),ok=false,model=null,pivot,R,S,cam,ry=-.5;
 try{var tc=document.createElement('canvas');ok=!!(window.WebGLRenderingContext&&(tc.getContext('webgl')||tc.getContext('experimental-webgl')))&&window.THREE&&THREE.GLTFLoader}catch(e){}
 if(ok){
  R=new THREE.WebGLRenderer({canvas:cv,antialias:true,alpha:true});R.setPixelRatio(Math.min(devicePixelRatio||1,2));R.outputEncoding=THREE.sRGBEncoding;
  S=new THREE.Scene();cam=new THREE.PerspectiveCamera(30,1,.1,100);cam.position.set(0,0,8);
- S.add(new THREE.AmbientLight(0xffffff,.75));
+ S.add(new THREE.AmbientLight(0xffffff,.8));
  var k=new THREE.DirectionalLight(0xfff0d8,1.4);k.position.set(-3,5,5);S.add(k);
  var r=new THREE.DirectionalLight(0xffc88a,.9);r.position.set(4,2,-4);S.add(r);
  pivot=new THREE.Group();S.add(pivot);
- new THREE.GLTFLoader().load('rogal.glb',function(g){var m=g.scene,b=new THREE.Box3().setFromObject(m),sz=b.getSize(new THREE.Vector3()),ct=b.getCenter(new THREE.Vector3());var s=3/Math.max(sz.x,sz.y,sz.z);m.scale.setScalar(s);m.position.set(-ct.x*s,-ct.y*s,-ct.z*s);model=m;pivot.add(m);draw()});
+ new THREE.GLTFLoader().load('rogal.glb',function(g){var m=g.scene,b=new THREE.Box3().setFromObject(m),sz=b.getSize(new THREE.Vector3()),ct=b.getCenter(new THREE.Vector3());var s=2.6/Math.max(sz.x,sz.y,sz.z);m.scale.setScalar(s);m.position.set(-ct.x*s,-ct.y*s,-ct.z*s);model=m;pivot.add(m);draw()});
 }
-function fit(){if(!ok)return;var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;R.setSize(w,h,false);cam.aspect=w/h;cam.position.z=w/h<.8?10:8.4;cam.updateProjectionMatrix();draw()}
+function fit(){if(!ok)return;var w=cv.clientWidth,h=cv.clientHeight;if(!w||!h)return;R.setSize(w,h,false);cam.aspect=w/h;cam.position.z=w/h<.9?9:8;cam.updateProjectionMatrix();draw()}
 if(ok){if(window.ResizeObserver)new ResizeObserver(fit).observe(cv);else addEventListener('resize',fit)}
 var vis=true;if('IntersectionObserver' in window)new IntersectionObserver(function(es){vis=es[0].isIntersecting}).observe($('start'));
-var sy=0;addEventListener('scroll',function(){sy=Math.min(1,scrollY/innerHeight)},{passive:true});
-function draw(){if(!model)return;var w=cv.clientWidth/cv.clientHeight,mob=w<.8;
- pivot.rotation.y=ry;pivot.rotation.x=.55;pivot.scale.setScalar((mob?.62:(w<1.3?.8:1))*(1+sy*.1));
- pivot.position.x=mob?0:(w>1.9?3.1:(w>1.3?2.4:1.8));pivot.position.y=(mob?-.45:-.1)-sy*.4;
- R.render(S,cam)}
+function draw(){if(!model)return;pivot.rotation.y=ry;pivot.rotation.x=.55;pivot.position.set(0,.55,0);R.render(S,cam)}
 var last=performance.now();
 (function loop(now){requestAnimationFrame(loop);var dt=Math.min(.05,(now-last)/1000);last=now;if(!still)ry+=dt*.5;if(vis)draw()})(last);
 
-/* pozycje z opisu na ich Facebooku */
-var items=[['Kawa','aromatyczna, napisz w uwagach jaka','Aromatyczna kawa, która łączy się z wyjątkowymi smakołykami.','kawa'],['Kanapki','pyszne kanapki','Pyszne kanapki na śniadanie albo przekąskę.','kanapki'],['Zestaw śniadaniowy','','Zestawy śniadaniowe na początek dnia.','sniadanie'],['Domowe ciasto','','Domowe ciasta do kawy.','ciasto'],['Drożdżówka','','Drożdżówki prosto z pieca.','drozdzowka'],['Rogale marcińskie','sezonowo, w listopadzie','Rogale marcińskie, o których pisali w listopadzie.','rogal']];
-var q=items.map(function(){return 0}),rail=$('rail'),bt=[];
-items.forEach(function(it,i){var c=document.createElement('article');c.className='item';
- c.innerHTML='<div class="ph"><span>Tu pojawi się zdjęcie z Waszej kawiarni</span><img alt="'+it[0]+', Baker&#39;s Cafe" src="photos/'+it[3]+'.jpg" loading="lazy" onerror="this.remove()"></div><div class="bd"><h3>'+it[0]+'</h3><p>'+it[2]+'</p><button type="button" class="add" aria-pressed="false">Dodaj do torby</button></div>';
- var b=c.querySelector('.add');bt.push(b);b.onclick=function(){q[i]=Math.min(9,q[i]+1);calc()};rail.appendChild(c)});
-var times=['jak najszybciej','za 15 minut','za 30 minut','za godzinę'],seg=$('seg');
-times.forEach(function(t,i){var id='t'+i;seg.insertAdjacentHTML('beforeend','<input type="radio" name="tm" id="'+id+'" value="'+t+'"'+(i===0?' checked':'')+'><label for="'+id+'">'+t+'</label>')});
-function when(){var c=document.querySelector('input[name=tm]:checked');return c?c.value:times[0]}
-function txt(){var L=['Dzień dobry,','','proszę o przygotowanie na odbiór:'],n=0;
- items.forEach(function(it,i){if(q[i]){L.push('• '+it[0]+' × '+q[i]);n+=q[i]}});
- if(!n)L.push('• (dodaj pozycje z listy „Z pieca”)');
- L.push('','Odbiór: '+when());var nt=$('nt').value.trim();if(nt)L.push('Uwagi: '+nt);var nm=$('nm').value.trim();L.push('','Pozdrawiam'+(nm?', '+nm:''));return {n:n,s:L.join('\n')}}
-function calc(){var r=txt();$('pre').textContent=r.s;
- bt.forEach(function(b,i){b.setAttribute('aria-pressed',q[i]>0);b.textContent=q[i]>0?'W torbie: '+q[i]+' (dodaj jeszcze)':'Dodaj do torby'});
- $('mail').href='mailto:bakery.marcinw@gmail.com?subject='+encodeURIComponent('Zamówienie na odbiór')+'&body='+encodeURIComponent(r.s)}
-['nm','nt'].forEach(function(i){$(i).addEventListener('input',calc)});seg.addEventListener('change',calc);
-$('copy').addEventListener('click',function(){var m=$('msg'),r=txt();if(!r.n){m.textContent='Najpierw dodaj pozycję.';return}
- if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(r.s).then(function(){m.textContent='Skopiowano. Wklej w wiadomość na Instagramie lub Facebooku.'},function(){m.textContent='Nie udało się skopiować. Zaznacz tekst ręcznie.'})}else{m.textContent='Nie udało się skopiować. Zaznacz tekst ręcznie.'}});
-$('mail').addEventListener('click',function(e){if(!txt().n){e.preventDefault();$('msg').textContent='Najpierw dodaj pozycję.'}});
-calc();
-})();
-</script>
-<style id="rv-css">
-.rv{opacity:0;transform:translateY(32px);transition:opacity .8s cubic-bezier(.2,.7,.2,1),transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
-.rv.in{opacity:1;transform:none}
-@media(prefers-reduced-motion:reduce){.rv{opacity:1;transform:none;transition:none}}
-</style>
-<script id="rv-js">
-/* pojawianie się bloków przy przewijaniu; bez JS lub przy ograniczonym ruchu wszystko jest od razu widoczne */
-(function(){
- if(!('IntersectionObserver' in window)||(window.matchMedia&&matchMedia('(prefers-reduced-motion: reduce)').matches))return;
- var grids='.tiles,.tri,.arches,.menu,.shelves,.rows,.cards,.shops,.nums .row,.split,.facts,.pick';
- var gridEls=Array.prototype.slice.call(document.querySelectorAll(grids));
- var targets=[];
- function add(el,d){if(!el||el.classList.contains('rv')||el.closest('.hero,.intro,.poster,.sky,header,.bar,.sheet'))return;el.classList.add('rv');el.style.setProperty('--d',Math.min(d,.6)+'s');targets.push(el)}
- document.querySelectorAll('main .wrap > *, footer .wrap > *').forEach(function(el){
-  if(gridEls.indexOf(el)>-1){Array.prototype.forEach.call(el.children,function(c,i){add(c,i*.08)})}else add(el,0)});
- gridEls.forEach(function(g){if(g.closest('.wrap')&&g.parentElement.classList.contains('wrap'))return;Array.prototype.forEach.call(g.children,function(c,i){add(c,i*.08)})});
- var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{rootMargin:'0px 0px -8% 0px',threshold:.05});
- targets.forEach(function(t){io.observe(t)});
+/* lista z pieca: każda pozycja otwiera gotowy e-mail */
+var items=[['Kawa','Aromatyczna kawa, która łączy się z wyjątkowymi smakołykami.'],['Kanapki','Pyszne kanapki na śniadanie albo przekąskę.'],['Zestaw śniadaniowy','Zestawy śniadaniowe na początek dnia.'],['Domowe ciasto','Domowe ciasta do kawy.'],['Drożdżówka','Drożdżówki prosto z pieca.'],['Rogale marcińskie','Sezonowo, w listopadzie, jak pisali na Facebooku.']];
+var ul=$('list');
+items.forEach(function(it){var li=document.createElement('li');li.className='row';
+ var body='Dzień dobry,\n\nchcę zapytać o: '+it[0]+'.\nProszę o informację o dostępności i cenie.\n\nPozdrawiam';
+ li.innerHTML='<h3>'+it[0]+'</h3><p>'+it[1]+'</p><a class="ask" href="mailto:bakery.marcinw@gmail.com?subject='+encodeURIComponent('Zapytanie: '+it[0])+'&body='+encodeURIComponent(body)+'">Zapytaj</a>';
+ ul.appendChild(li)});
+document.querySelectorAll('.top a').forEach(function(a){a.addEventListener('click',function(e){var id=a.getAttribute('href').slice(1),t=$(id);if(t){e.preventDefault();var off=innerWidth>900?60:0;window.scrollTo({top:t.getBoundingClientRect().top+scrollY-off,behavior:still?'auto':'smooth'})}})});
 })();
 </script>
 <script data-goatcounter="https://penia-demo.goatcounter.com/count" data-goatcounter-settings='{"path":"bakers-cafe"}' async src="//gc.zgo.at/count.js"></script>
